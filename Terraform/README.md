@@ -1,19 +1,14 @@
-# Action Samples for deploying using Terraform
+# Automate templates
 
-With Terraform workflows, you can automate your terraform templates to deploy to Azure.
-
-Terraform templates use Azure Resource Manager to deploy resources to Azure. More details on Terraform Provider for Azure can be found [here](https://www.terraform.io/docs/providers/azurerm/index.html).
+[Azure(c(TM))](https://www.terraform.io/docs/providers/azurerm/index.html).
 
 ## Configure Azure credentials
-
-To fetch the credentials required to authenticate with Azure, run the following command:
-
+| -fetch | --cred |
+| ------ | ------ |
 ```sh
 az ad sp create-for-rbac --name "myApp" --role contributor \
                             --scopes /subscriptions/{subscription-id}/resourceGroups/{resource-group} \
                             --sdk-auth
-
-  # Replace {subscription-id}, {resource-group} with the subscription, resource group details
 
   # The command should output a JSON object similar to the example below
 

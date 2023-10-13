@@ -1,8 +1,0 @@
-{
-    "name": "Node.js Serverless App to Azure",
-    "description": "Deploy Windows Node.js app to Azure Functions",
-    "iconName": "azure",
-    "categories": [
-        "node" , "Deployment"
-    ]
-}

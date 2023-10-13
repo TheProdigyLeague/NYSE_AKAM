@@ -1,47 +1,120 @@
-# Action Samples for training and deploying machine learning models to Azure Machine Learning
-
-We have released multiple actions to help you easily build a Continuous Integration and Continuous Delivery pipeline for a ML/AI project.
+# Learning Mods
+![ml](https://github.com/TheProdigyLeague/NYSE_AKAM/assets/30985576/5deaef59-8106-48a0-9f93-1622869f8049)
+## Build continous integration and delivery pipelines for ML/AI.
 - [aml-workspace](https://github.com/Azure/aml-workspace) - Connects to or creates a new workspace
 - [aml-compute](https://github.com/Azure/aml-compute) - Connects to or creates a new compute target in Azure Machine Learning
 - [aml-run](https://github.com/Azure/aml-run) - Submits a ScriptRun, an Estimator or a Pipeline to Azure Machine Learning
 - [aml-registermodel](https://github.com/Azure/aml-registermodel) - Registers a model to Azure Machine Learning
 - [aml-deploy](https://github.com/Azure/aml-deploy) - Deploys a model and creates an endpoint for the model
+![ai](https://github.com/TheProdigyLeague/NYSE_AKAM/assets/30985576/c87123f4-c4b8-4bf7-a0c1-eb3e6b8d45af)
 
-We will be using the GitHub Actions for defining the workflow along with Azure ML services for model retraining pipeline, model management and operationalization.
++ Users define workflows with Azure(cTM) ML.srvc and mod retraining pipelines, mod mgmt, opertionalization.
+
 <p align="center">
   <img src="img/ml-lifecycle.png" alt="Azure Machine Learning Lifecycle" width="700"/>
 </p>
 
-These actions are based on [DevOps principles](https://azure.microsoft.com/overview/what-is-devops/) and practices that increase the efficiency of workflows. For example, continuous integration, delivery, and deployment. 
-We have applied these principles to the machine learning process, with the goal of:
-- Faster experimentation and development of models
-- Faster deployment of models into production
-- Quality assurance
++ DevOps Principles
+  - Increase efficiency of workflows
+      > continous integration, delivery & deployment
+          [DevOps principles](https://azure.microsoft.com/overview/what-is-devops/)
+Principles of ML...
 
-Here we have two template contains code and workflow definitions for a machine learning project that demonstrates how to automate an end to end ML/AI lifecycle.
+1. EXP & DEV (tools)
+2. PROD & MODS (speed)
+3. QA
+
+两个代码模板。
+▶ workflow defines ML
+demo mode:
+> automates end-user ML/AI rotations
 
 1. **Simple template repository: [ml-template-azure](https://github.com/machine-learning-apps/ml-template-azure)**
+मशीन टेम्प्लेट पर जाएं और "फॉर डंबासेस गाइड" और सेटअप नाउ का पालन करें!
+प्रक्रिया को सीखने और उपयोग करने में केवल कुछ मिनट लगते हैं!
+> G  i  t  _  H  u  b क्रियाओं को संयोजन में सीखना!
+> डेमो मोड एक सरल प्रक्रिया है!
+> अभी प्रशिक्षित करें और तैनात करें!
++ 機械学習の運用！
+- [ 蔚蓝机器 ] L  e  a  r  n  |  G  i  t  H  u  b  (  c  ( T  M  ) ) |  A  c  t  i  o  n  s
+- يوضح هذا القالب عملية بسيطة جدًا للتدريب ونشر نماذج التعلم الآلي.
 
-    Go to this template and follow the getting started guide to setup an ML Ops process within minutes and learn how to use the Azure       Machine Learning GitHub Actions in combination. This template demonstrates a very simple process for training and deploying machine     learning models.
+3. **13375 (Расширенный режим) [mlops-enterprise-template](https://github.com/Azure-Samples/mlops-enterprise-template)**
 
-2. **Advanced template repository: [mlops-enterprise-template](https://github.com/Azure-Samples/mlops-enterprise-template)**
-
-    This template demonstrates how approval processes can be included in the process and how training and deployment workflows can be       splitted. It also shows how workflows (e.g. deployment) can be triggered from pull requests. More enhancements will be added to this     template in the future to make it more enterprise ready.
-    
-
-
-# Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-
+![token](https://github.com/TheProdigyLeague/NYSE_AKAM/assets/30985576/9f8c5103-2596-4df8-84f1-c7de41efcdfa)
+| temp | -demo |
+|--|--|
+| 0auth  | -acc |
+| proc | -incl |
+| train  | -mod |
+| act | -depl |
+| splice | -flo |
+| pr | -req |
+| machine  | -upd |
+| future | -test |
+```bash
+$ function this
+{
+  temp -demo (in)
+    proc -incl
+      train '&&' ("deploy")
+  {"/workflows/"} | ["SPLICE"]
+            act -depl | ["MOD"]: -flo pr -req
+["SHOW"]: _MACHINE_STATE
+$from future -test
+\docker --make
+\.fs["template"]
+}
+```
+<pre id="output">@@@@@@@@@@@@@@@@@@@@@@@@@@%@%%%%%%%%%%%#####################****************************************
+@@@@@@@@@@@@@@@@@@@@@@@@@@%@%%%%%%%%%%%##################**************************************+*+++
+@@@@@@@@@@@@@@@@@@@@@@@@@%%%%%%%%%%####***#*###########*#*********************+**++++++++++++++++***
+@@@@@@@@@@@@@@@@@@@@@@%#####*+*##*******+****+**######***+++++++++++++++++++++++++++++++++++++++++++
+@@@@@@@@@@@@@@@@@@%%###****************+++++++++****#*+++******+++=+***+*+++++++++++++++++++++++++++
+@@@@@@@@@@@@@@@@######*****************++++++++===++++********+=***+=+++++++++++++++++++++++++++++++
+@@@@@@@@@@@@@@#****+#%##***************+++++++++===-=+=************++=++++++++++++++++++++++++++++++
+@@@@@@@@@@@@@#*###***#****+*@@@+@@@%@@@@##+++++++=--+*#+**********++++=+++++++++++++++++++++++++++++
+@@@@@@@@@@@@#+************@+@@@@@@%%%%@@@@@##++++=--+=:*=+*******+++++++++++++++++++++++++++++++=+++
+@@@@@@@@@@@*++********+*%@@@@@%#*+::-%%#%@@@%@%*+====..:#-+*****++++++++++++++++++++++++++++++++++++
+@@@@@@@@@@#++*+********%@@%@@*:*#%#+*=%##*@@@%%%%%#==-:.:+-+***+++++++=+++++++++++===+++++==++++++++
+@@@@@@@@%++++**=+***#*+@@@@@#:#@@@@@%*-#@@%@@@@@@@%+=--:....=*+++++++=++++++++++====+====++++=++++++
+@@@@@@@@*+++++==*%%%#*%%%@@%+*@@@@@@@*%+#@@@@@@@@@#+=--::...:=+++++==+++++++++++=++============+++++
+@@@@@@@@@#++++==+#%%#+@@@@@@+=@@@@@@@@*-#@@%@@@@@@*+=---::...-+++==+++++++++++=+++===========+++++++
+@@@@@@%@@#++++===+#%=+@@@@@@#-=@@@@@@+*=%@@@%@@@%#==-----::..:++++++++++++++++==+=============++=+++
+@@@@@@@@@*++++=+=+##==@%@@@@@%*+*%#=::=@@@@@%@@@@%+=--::::..::++++++++++++++++=+++===========+++++++
+@@@@@@@#@@+*++=+++*#*=@@@@@@%#@@#@%*#@@@@@@%%%@@#*+=-::=*+-::-++++++++++++++++++=+===========++=++++
+@@@@@@@%*%@***=+*+*%***@@%%%#@@@%@@@@@@@@@@+*=+++++=-:::*+:.-+*++++++++++++++++++===++===++==++=++++
+@@@@@@@%%@@@#*+**#%@%#*#@@@@@@@@%%@@%@@@@@*%*++**++=--:...:::=*++++++++++++++++++++++++=++++++++++++
+@@@@@@@@%#@@@#***#*#***+%@@@@@@@%%@@@@@@%@@@#+=%%##+=-::....::=*++++++++++++++++++++++++++++++++++++
+@@@@@@@@%%*@@%#**#####**+%@@@@@@@@@@@@@%%%%@@#+++*++=--::.:..::+*+++++++++++++++++++++++++++++++++++
+@@@@@@@@%%@@@@%#*#######**@@@@@@@@%@@*%@@@%#%@@%+++===-::....:-:+*++++++++++++++++++++++++++++++++++
+@%%@@@@%%#@#@@@%#%########*@@@@@@@@@*%%%##%@@%#*+++===--:...:----+++++++++++++++++++++++++++++++++++
+@@@%%%@@@%@@%@@@%###*#####**@@@@@@@@#@%%#%@%##*++++==--::..:-----:=**+++++++++++++++++++++++++++++++
+@@@@@@@@@@%@@@@@@*#**#######%@@@@@@@+%%##%####*=+===--::::..:::===+******+++++++++++++++++++++++++++
+@@@@@@@@@@+%%%@@@@#****####*#@@@@@%@%*%@%#*#%%++====-----:....+**********+++++++++++++++++++++++++++
+@@@@@@@@@@@@@%@@@@%%****#%%##@@@@@@@@@#*%@%**+++=====-=--:.:...****************+*+++++++++++++++****
+@%%@@@@@@#%@@@@@@@%*%*=+*%%##@@@@@@@@@@@@*+++***========-::---:**********************+**************
+@@@@@@@@@@##@#%@@@@%+@==*###*%@@@@%@@@@@@@@@%#@@@%*+===---....=*************************************
+@@@@@@@@@@@+@#%@@@@@%+#+*###*%@@@@@@@@%+##@@@@@%%###%##*+-:::=**************************************
+#@@@@@@@@@@*@@@@@@%%*=%#*****%@@@%*%@*+@@%%%%%%%%%%##+#@#:--=*#*#***********************************
+@@@@@@@@@@@#@@@@@%@##@@%#%@%%@#@@@%%@+=##%%%%%%########*-:-*#####***********************************
+@@@@@@%#@@*#@@@%@@%%%-%%%@@%*%@@%@@%=+**%%%%%%%%%#######*++********#******#*************************
+@%%@@@#@@*@@@@@%@@#%@=@@@@@@@%@#@#*%+%+*%%%%%%%%%%%#%#############**####**#*****#***#**#*#*#*#*#****
+@@@@@@%@@@@@@@@@@@@#%@@%%*@%#=%%%@#%@@**%%%%%%%%%%%%%%##################*##*#######*####*#*#*###*###
+@@@@@@@@@@@@@@@@@@#*+*@@@@@%#@@@%#%#@@##%%%%%%%%%%%%%%%%%########*##################################
+@@@@@@@@@@%@@@%@@#**%%@@@@*@%*%@@#@%@%%#%@%%%%%%%%%%%%%%%##%%#######################################
+@@@@@@@@@@@@@@@@%***@@@@%@%@%%@@@%%%+%#+@%%@%%%%%%%%%%%%%%%%#%%%#####%##############################
+@@@@@@@@@@@@@%%@**#@#%@@%@@@%@@%@@@@%@#*@@@@%%%%%%%%%%%%%%%###%%%%%%%%%#############################
+@@@@@@@@@@@@%#**##@@@@@%@@@@@*%%@@##%@@@@@@@@@@@@%%%%%%%%%#%%###%%%%%%%%%%%%%#####%############%###%
+@@@@@@@@@@@##*%@@=#%@@@@@@@@@@@%%##*=+*#*@@@@@@@%@@%@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#%%###
+@@@@@@%@@@*#+#*@@%@@@@@@@@@@%%@@@@#%@%**@@@@@@@@@@@%@@@%%%%%%%%%%%%##%%%%%%###%%%%%%%%%%%%%%%%%#++**
+@@@#%@@@@*+*@@#@@#*@@@@@@@@@@@@@@@@@@#@@@@@@@@@@@@@@%*%%%+%%%%%%%%%%#%%%%%%##%%%%%%%%%%%%%%%%%#+#%%%
+@@#*@@@@*%@@@%%@%####**#%%%@@@@@@%@@#+*%@@@@@@@@@@@#%@@@@%%#%%@%@%%%%*%%%%%*%%%%%%%%%%%%%%%%%#=#%%%%
+@%#@@@%%@@@@@@@%###*****+++++***+*+=--+==++%@@@@@@@*@@@@@%%*%%@%@%@%@%%%%%%%%%%%%%%%%%%%%%%%#+#%%%%%
+%%%@%#@@@@@@@@@@@@@@@@@@%#*+**********++=-+*@@@@@@@%#%@@@%#%@@@%@@@%#%@%@%@%%%@%%%%%%%%%%@%%#*%@%@@@
+%@@%@@@@@@@@@@@@@@@@@@@@@@@@#########****=+*%@@@@@@@@%%%%%@@@@@@@@@#@@@@@%@@%%%%%#%%@%%@@@@@@#+%@@@@
+@@@@@@@@@@@@@@##@@@@@@@@@@@@@@###%%%%%###*=+*%@@@@@@@%@@@@@@@@@@@@@@@@@@@%@%@@@@@@%%@%@@@@@@@@%+%@@@
+#@@@@---:::@#::::-#@@@@@@@@@@@@++**##%###***++@@@@@%@@@@@@@@@@@@@@@@@%###*#@@@@@@@@######@@@@@@%*%%%
+@@@@=::-==+%---=-::-#@@@@@@@@@@#=---++**#++**++=%%%%@@@%%@%@@@@@@@@@@@@@@@@@@@@@@@%%@@@@@#@@@@@@@%%%
+@@%%*+@@@@@@@@@*+==:.+%@@@@@@@@@+=======+*##***+=+%@@@@@%#%@@@@@@@@@@@@@@@@@@%@@@%@@@@@@@@%@@@@@@@@@
+</pre>

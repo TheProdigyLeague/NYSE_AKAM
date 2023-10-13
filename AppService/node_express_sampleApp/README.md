@@ -82,17 +82,20 @@ build-and-deploy:
   name: Build and Deploy
   runs-on: ubuntu-latest
 ```
+
 - **Using an action**: Actions are reusable units of code that can be built and distributed by anyone on GitHub. To use an action, you must specify the repository that contains the action.
       
-  ```yaml
+```yaml
+
  steps:
  - uses: actions/checkout@master
  - name: Use Node.js ${{ env.NODE_VERSION }}
    uses: actions/setup-node@v1
    with:
      node-version: ${{ env.NODE_VERSION }}
+ 
+```
 
-  ```
 - **Running a command**: You can run commands on the job's virtual machine (runner). We are running below NPM commands to install dependencies build, and test our application.
 
 ```yaml

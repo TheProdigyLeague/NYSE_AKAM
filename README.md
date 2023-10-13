@@ -1,6 +1,6 @@
 <pre id="output" class="d-inline-block text-left mb-0" style="overflow-y: hidden;">    _    _                         _             _         <br>   / \  | | ____ _ _ __ ___   __ _(_)_______  __| |        <br>  / _ \ | |/ / _` | '_ ` _ \ / _` | |_  / _ \/ _` |        <br> / ___ \|   &lt; (_| | | | | | | (_| | |/ /  __/ (_| |        <br>/_/___\_\_|\_\__,_|_| |_| |_|\__,_|_/___\___|\__,_|        <br>|_   _|__  ___| |__  _ __   ___ | | ___   __ _(_) ___  ___ <br>  | |/ _ \/ __| '_ \| '_ \ / _ \| |/ _ \ / _` | |/ _ \/ __|<br>  | |  __/ (__| | | | | | | (_) | | (_) | (_| | |  __/\__ \<br>  |_|\___|\___|_| |_|_| |_|\___/|_|\___/ \__, |_|\___||___/<br>                                         |___/             </pre>
 
-# Use Azure starter templates present in this repo to easily create GitHub CI/CD workflows.
+# Use Azure Starter Templates in this repo to create GitHub CI/CD workflows.
 
 `/AppService/asp.net-core-webapp-on-azure.yml`
 

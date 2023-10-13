@@ -1,16 +1,15 @@
-# Action Samples for deploying to Azure Functions
+# Azure Functions
 
-Use `Azure/functions-action` to automate your workflows to deploy to [Azure Functions](https://azure.microsoft.com/en-us/services/functions/).
+`Azure/functions-action` automate your workflows to deploy [Azure Functions](https://azure.microsoft.com/en-us/services/functions/).
 
-If you are looking for a GitHub Action to deploy your customized container image into an Azure Functions container, use [`azure/functions-container-action`](https://github.com/Azure/functions-container-action).
+Azure Functions container [`azure/functions-container-action`](https://github.com/Azure/functions-container-action).
 
-# End-to-End Workflows
+## DevOps (RBAC)
 
-## Create Azure function app and Deploy using GitHub Actions (RBAC)
-1. Follow the tutorial [Azure Functions Quickstart](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code)
-2. Pick a template from the following table depends on your Azure Functions **runtime** and **OS type** and place the template to `.github/workflows/` in your project repository.
+1. Tutorial [Azure Functions Quickstart](https://docs.microsoft.com/en-us/azure/azure-functions/functions-create-first-function-vs-code)
+2. Pick a template **runtime** and **OS type** and place template`.github/workflows/` in your project repository.
 3. Change `app-name` to your function app name.
-4. Commit and push your project to GitHub repository, you should see a new GitHub workflow initiated in **Actions** tab.
+4. New GitHub workflow initiated in **Actions** tab.
 
 | Templates  | Windows |  Linux |
 |------------|---------|--------|

@@ -1,3 +1,4 @@
+![Screenshot 2023-10-12 at 22 20 50](https://github.com/TheProdigyLeague/NYSE_AKAM/assets/30985576/dba553bc-6fe5-4cc6-9e15-d06143870881)
 # Serverless Web Application
 
 * Architecture of SWA. Static Angular.JS content.APP from Azure Blob Storage (Static Website), and implements * + REST APIs for CRUD with Azure Functions. 

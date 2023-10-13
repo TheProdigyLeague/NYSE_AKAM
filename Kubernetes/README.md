@@ -1,4 +1,5 @@
 # Kubernetes(K8's)
+![k8](https://github.com/TheProdigyLeague/NYSE_AKAM/assets/30985576/72d1ef1c-fdf8-4af6-a2e7-790fd9dbb556)
 
 We have released multiple actions to help you connect to a Kubernetes cluster running on-premises or on any cloud (including Azure Kubernetes Service – AKS), bake and deploy manifests, substitute artifacts, check rollout status, and handle secrets within the cluster. 
 -	[Kubectl tool installer](https://github.com/Azure/setup-kubectl)(`azure/setup-kubectl`): Installs a specific version of kubectl on the runner.

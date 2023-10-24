@@ -58,12 +58,12 @@
                                                                                   .---------------------------------------------------------------------------------.                                
                                                                        :---------------------------------------------------------------------------------------------:                               
                                                                                                                                                                                                      
-name: Create Azure Resource (IaC)
-on: 
+name: Create Azure(cTM) Resource (IaC)
+on:
   workflow_dispatch:
     inputs:
       AZURE_REGION: 
-        description: 'Azure Region to deploy Azure resources'
+        description: 'Azure Region | Azure resources'
         required: true    
         default: 'azure-region'  
       ENVIRONMENT_TYPE: 
@@ -83,17 +83,11 @@ on:
         required: true
         default: 'user-msi'
       MSI_RESOURCE_GROUP: 
-        description: 'Resource Group where User Managed Identity is located'
+        description: 'Resource Group | SQL '
         required: true
         default: 'msi-resource-group'
   
 # CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# 1. Set up the following secrets in your repository:
-#   AZURE_CREDENTIALS
-#
-# 2. Change below variables for your configuration:
 env:
   AZURE_REGION: ${{ github.event.inputs.AZURE_REGION }}
   ENVIRONMENT_TYPE: ${{ github.event.inputs.ENVIRONMENT_TYPE }}

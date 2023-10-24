@@ -16,11 +16,14 @@
 #                                                                            #
 ##############################################################################
 """
-# This workflow triggers an azure policy compliance scan on the subscription. 
-# Waits till the scan is complete and displays the latest compliance state of resources in logs.
-# The compliance scan action will fail if there are non-compliant resources found( Use 'scopes-ignore' input to ignore the compliance status of  resources )
-# The compliance scan action will not upload a report to the workflow run
-
+/workflow/trigger-scan/policy_compliance/scans/subscription/$2y$07$Id3qWXJkjO2K4G6CoVjaM.r29x10m3ZsJKP7DkCePwPIN6RFYrG9O
+...
+[SCAN COMPLETE!]
+# 在日誌中顯示資源的最新合規狀態。[logs] #
+$ echo: "SCAN FAIL! NON COMPLIANCE RESOURCE use 'scopes-ignore input' "
+$ ignore ['compliance status', 'resources']
+# ...the compliance scan action will not upload a report to the workflow run
+<br>
 {
     "name": "Trigger Azure Policy Compliance Scan",
     "description": "Trigger an on-demand Azure policy compliance scan on a scope",
@@ -29,7 +32,7 @@
         "Deployment"
     ]
 }
-
+<br>
 name: scan-subscription-without-report
 on: push
 
@@ -54,7 +57,7 @@ on:
   push:
     paths:
     - '**trigger-scan-on-scope.yml'
-
+~
 env:
   SCAN_SCOPE: /subscriptions/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx    # set this to the scope that is to be scanned. It can be a Subscription, Resource group or a resource
 
@@ -72,8 +75,7 @@ jobs:
       uses: azure/policy-compliance-scan@v0
       with:
         scopes: ${{env.SCAN_SCOPE}}
-# This workflow triggers an azure policy compliance scan on the resource group. 
-# Waits till the scan is complete and displays the latest compliance state of resources in logs and uploads a compliance report in form of a CSV file.# 
+
 # The compliance scan action will pass irrespective of the compliance status of scanned resources
 
 name: scan-rg-ignore-compliance-status
@@ -99,17 +101,41 @@ jobs:
           /subscriptions/@@@@@@@@-@@@@-@@@@-@@@@-@@@@@@@@@@@@/resourceGroups/my-new-resource-group/providers/Microsoft.Web/sites/zenithWorksApp     
         wait: false
 name: Multijob workflow to build and deploy Docker app to Azure
-
+["碼頭工人"]
+                                               .++++++=..                                           
+                                               .#++*##*..                                           
+                                     ...........#++*##*.                                            
+                                   .------------#***##*.           ...:....                         
+                                 .  #*+***#+++**#+**##*.           ..***-..                         
+                               .....#****##++**##+**##*.....       .=#++**...  ..                   
+                              ......#*****#+++**#****#*:......     .%*+++*#......                   
+                              ***+***++++*#****##++**##**###=.     .=#++++##***##+.                 
+                              ***+***+++*##+**###++*###**###=.     ..+*+++++++++*-.                 
+                       .......***++**++++*#+****#+++**#+***#=.....-+**+++++*###-..                  
+                        .#*+++++++++++++++++++++++++++++++++++++++++++++#..... ...                  
+                 ....=:..#*++++++++++++++++**+++++++++**++++++++++++*++#:....-...                   
+                 ..:=++++*########******########****########*****######+==+++++=...                 
+                       ...#*******************************************:.                            
+                       .. :#************+#-+***********************##..                             
+                          .-#************==**********************##:...                             
+                           .:**+*****+-=***********************#*-..                                
+                            ..-+-:::::::-*******************#*=...                                  
+                              ..:**-::::::-*************##+:.                                       
+                                 ....####+=--+*######=....  .                                       
+                           ....       ....... .....   ...                                           
+                      .....=+:    .....     ......    :+-.      .  ...       .  ..                  
+                      .....*%-   ......       ......  -%+. . .   ......        ....                 
+                 . ..%####.*%-...-####*.......=####+..-%+..-#-. ..*###*:.......###-                 
+                ..=##*..-+%#%-.-##+:.-###...=#*=..=*:.-%+:##+..:##*:.:+##:..-##*-..                 
+                 -#*.. .. .#%-+#*. ....-##.-#=......  -%##+:...#*:. ..+##=.-##...                   
+                .-#-      .*%-*#=    ...+#.+%-.       -%#*....:#*...+#*-...-#-. .                   
+                 -%#......:%+.:#*......=##.:##:.....  -%###=...##**##..   .-#-.                     
+                 .:*##*+*##+....###*=###+...-##%*+##=.-#+.*##:..*##*+*%#:..-#-.                     
+                    .-+++:.    ...=+++:..   ...=++=:...=:..:+:....:+++-.. .:+:                      
 on: push
 
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# Set up the following secrets in your repository:
-#   AZURE_CREDENTIALS, REGISTRY_USERNAME, REGISTRY_PASSWORD, AZURE_DEVOPS_TOKEN
-# 2. Change these variables for your configuration:
 env:
-  CONTAINER_REGISTRY: actionregistry.azurecr.io   # set this to Container Registry name
+  CONTAINER_REGISTRY: akam.azurecr.io   # set this to Container Registry name
 
 jobs:
   build-in-actions-workflow:
@@ -131,8 +157,7 @@ jobs:
     - run: |
         docker build . -t ${{ env.CONTAINER_REGISTRY }}/nodejsapp:latest
         docker push ${{ env.CONTAINER_REGISTRY }}/nodejsapp:latest
-$ run py
-    >>> import docker
+
   deploy-using-azure-pipelines:
     needs: build-in-actions-workflow
     runs-on: ubuntu-latest
@@ -143,4 +168,3 @@ $ run py
         azure-devops-project-url: 'https://dev.azure.com/OrganizationName/ProjectName'
         azure-pipeline-name: 'WebApp_Azure_Prod' 
         azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
-        

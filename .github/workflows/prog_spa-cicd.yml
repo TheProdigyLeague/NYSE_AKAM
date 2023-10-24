@@ -50,7 +50,7 @@
                                            .-*########*:.                                           
                                            .  ..***+... .                                           
                                                                                                     
-name: Build and publish Angular (SPA)
+name: Angular (SPA)
 on: 
   workflow_dispatch:
     inputs:
@@ -137,15 +137,7 @@ on:
       CDN_ENDPOINT_NAME: 
         description: 'CDN endpoint name'
         required: true
-        default: 'cdn-endpoint-name'                        
-  
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# 1. Set up the following secrets in your repository:
-#   AZURE_CREDENTIALS
-#
-# 2. Change below variables for your configuration:
+        default: 'cdn-endpoint-name'
 env:
   ENVIRONMENT_TYPE: ${{ github.event.inputs.ENVIRONMENT_TYPE }}
   APP_NAME_PREFIX: ${{ github.event.inputs.APP_NAME_PREFIX }}
@@ -159,19 +151,16 @@ env:
   ANGULAR_PATH: 'client/angular/ToDoSpa'
   NODE_VERSION: '14'
   BICEP_FILE_PATH: 'deploy'
-
 jobs:
   angular_cicd:
     runs-on: ubuntu-latest
     steps:
-    # Authentication
-    # Set up the following secrets in your repository: AZURE_CREDENTIALS
-    # For details on usage of secrets, please refer https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+    # 0auth | AZURE_CRED    
     - name: Azure Login
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS  }}
-    
+        
     # Checkout
     - name: Checkout
       uses: actions/checkout@v1

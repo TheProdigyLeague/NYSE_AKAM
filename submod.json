@@ -1,0 +1,118 @@
+天藍色。 [節點] 點。微軟網路應用程式。框架和其他東西！
+echo "  __   ____  ____  __  _ ";
+echo "__) | (_ (_`/ () \|  \| |";
+echo "\___/.__)__)\____/|_|\__|";
+<path d="M0 2.75C0 1.784.784 1 1.75 1H5c.55 0 1.07.26 1.4.7l.9 1.2a.25.25 0 0 0 .2.1h6.75c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 15H1.75A1.75 1.75 0 0 1 0 13.25Zm9.42 9.36 2.883-2.677a.25.25 0 0 0 0-.366L9.42 6.39a.249.249 0 0 0-.42.183V8.5H4.75a.75.75 0 0 0 0 1.5H9v1.927c0 .218.26.331.42.183Z"></path>
+echo " ____  ____  _____  __  _  ____  _____ ";
+echo "| _) \/ () \|_   _||  \| || ===||_   _|";
+echo "|____/\____/  |_|  |_|\__||____|  |_|  ";
+{
+    "name": "Docker ASP.NET Core Web App with Azure SQL backend to Azure",
+    "description": "Build and Deploy docker ASP.NET Core Web App with Azure SQL backend to Azure",
+    "iconName": "azure",
+    "categories": [
+        "Docker", "ASP.NET Core", "Azure SQL", "Deployment"
+    ]
+}
+{
+    "name": "ASP.NET Core Web App to Azure",
+    "description": "Deploy ASP.NET Core app to Azure App Service",
+    "iconName": "azure",
+    "categories": [
+        "ASP", "Deployment"
+    ]
+}
+{
+    "name": "ASP.NET Core Serverless App to Azure",
+    "description": "Deploy ASP.NET Core app to Azure Functions using a Publish Profile",
+    "iconName": "azure",
+    "categories": [
+        "ASP", "Deployment"
+    ]
+}
+{
+    "name": "ASP.NET Core Serverless App to Azure",
+    "description": "Deploy ASP.NET Core app to Azure Functions",
+    "iconName": "azure",
+    "categories": [
+        "ASP", "Deployment"
+    ]
+}
+echo " __  __ __  __ ____  ____   _    ";
+echo "|  \/  |\ \/ /(_ (_`/ () \ | |__ ";
+echo "|_|\/|_| |__|.__)__)\____/=|____|";~#//天藍色。
+{
+    "name": "Java Web App to Azure",
+    "description": "Deploy Java Web App to Azure App Service",
+    "iconName": "azure",
+    "categories": [
+        "java" ,"Maven" , "Deployment"
+    ]
+}
+[節點] 點。
+{
+    "name": "Python Web App to Azure",
+    "description": "Deploy Python app to Azure App Service",
+    "iconName": "azure",
+    "categories": [
+        "Python" , "Deployment"
+    ]
+}
+{
+    "name": "Python Serverless App to Azure",
+    "description": "Deploy Python app to Azure Functions",
+    "iconName": "azure",
+    "categories": [
+        "Python" , "Deployment"
+    ]
+}
+echo "  .--.  .---. .-. .-..----. .----..----..-.  .-.";
+echo " / {} \{_   / | { } || {}  }| {_  | {}  }\ \/ / ";
+echo "/  /\  \/    }| {_} || .-. \| {__ | .--'  }  {  ";
+echo "`-'  `-'`---' `-----'`-' `-'`----'`-'     `--'  ";
+{
+    "name": "Node.js Web App to Azure",
+    "description": "Deploy Node.js app to Azure App Service",
+    "iconName": "azure",
+    "categories": [
+        "node" , "Deployment"
+    ]
+}
+{
+    "name": "Build and deploy Docker Web App to Azure",
+    "description": "Build and deploy Docker app to Azure App Service",
+    "iconName": "azure",
+    "categories": [
+        "Docker", "Deployment"
+    ]
+}
+{
+    "name": "Build and deploy Docker Serverless App to Azure",
+    "description": "Build and deploy Docker app to Azure Functions",
+    "iconName": "azure",
+    "categories": [
+        "Docker", "Deployment"
+    ]
+}
+{
+    "name": "Publish Nuget Packages",
+    "description": "Publish Nuget package to GitHub Package Registry and Azure Artifacts",
+    "iconName": "azure",
+    "categories": [
+        "Nuget", "Deployment"
+    ]
+}
+
+微軟網路應用程式。
+{
+    "name": "Java Serverless App to Azure",
+    "description": "Deploy Java War package to Azure Functions",
+    "iconName": "azure",
+    "categories": [
+        "java" ,"Maven" , "Deployment"
+    ]
+}
+/**
+*    |  /\  \  /  /\ 
+* \__/ /~~\  \/  /~~\
+*/

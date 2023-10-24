@@ -1,17 +1,22 @@
+     _       _                _   
+  __| | ___ | |_   _ __   ___| |_ 
+ / _` |/ _ \| __| | '_ \ / _ \ __|
+| (_| | (_) | |_  | | | |  __/ |_ 
+ \__,_|\___/ \__| |_| |_|\___|\__|
 name: Build and publish .NET Functions
 on: 
   workflow_dispatch:
     inputs:
       ENVIRONMENT_TYPE: 
-        description: 'Environment: dev, test, or prod'
+        description: 'env, dev, test, or prod'
         required: true
         default: 'dev'
       APP_NAME_PREFIX: 
-        description: 'Prefix to be used in naming Azure resources'
+        description: 'Prefix_Azure: resources'
         required: true
         default: 'prefix'
       RESOURCE_GROUP_NAME: 
-        description: 'Resource Group to deploy Azure resources'
+        description: 'Resource_Group: deploy Azure resources'
         required: true
         default: 'resource-group'
       API_NAME: 
@@ -22,7 +27,7 @@ on:
         description: 'API definition URL'
         required: true
         default: 'https://<fuction-name>.azurewebsites.net/api/swagger.json'
-      APIM_NAME: 
+      APIM_NAME:
         description: 'APIM name'
         required: true
         default: 'apim-name'
@@ -33,15 +38,13 @@ on:
       ORIGIN_URL: 
         description: 'Client app URL' # This is CDN endpoint URL
         required: true
-        default: 'https://<cdn-endpoint-name>.azureedge.net'              
-  
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# 1. Set up the following secrets in your repository:
-#   AZURE_CREDENTIALS
-#
-# 2. Change below variables for your configuration:
+        default: 'https://<cdn-endpoint-name>.azureedge.net'
+.h
+.c
+.config
+%AZURE_CREDENTIALS%
+{for vars in libs}
+$ .config
 env:
   ENVIRONMENT_TYPE: ${{ github.event.inputs.ENVIRONMENT_TYPE }}
   APP_NAME_PREFIX: ${{ github.event.inputs.APP_NAME_PREFIX }}
@@ -68,7 +71,11 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS  }}
-    
+    _                        
+   / \    _____   _ _ __ ___ 
+  / _ \  |_  / | | | '__/ _ \
+ / ___ \  / /| |_| | | |  __/
+/_/   \_\/___|\__,_|_|  \___|   
     # Checkout
     - name: Checkout
       uses: actions/checkout@v1
@@ -86,7 +93,11 @@ jobs:
         pushd ./${{ env.APP_SOURCE_PATH }}/${{ env.FUNCTIONAPP_PATH }}
         dotnet build --configuration Release --output ./outputs
         popd
-
+     _       _     _   _      _      ____               
+  __| | ___ | |_  | \ | | ___| |_   / ___|___  _ __ ___ 
+ / _` |/ _ \| __| |  \| |/ _ \ __| | |   / _ \| '__/ _ \
+| (_| | (_) | |_  | |\  |  __/ |_  | |__| (_) | | |  __/
+ \__,_|\___/ \__| |_| \_|\___|\__|  \____\___/|_|  \___|
     # Publish .NET application to Azure Function
     - name: Publish to Azure Functions to ${{ env.FUNCTION_NAME }}
       uses: Azure/functions-action@v1

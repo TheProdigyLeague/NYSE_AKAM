@@ -168,3 +168,240 @@ jobs:
         azure-devops-project-url: 'https://dev.azure.com/OrganizationName/ProjectName'
         azure-pipeline-name: 'WebApp_Azure_Prod' 
         azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+name: Build and deploy Docker app to Azure
+
+on: push
+
+# CONFIGURATION
+# For help, go to https://github.com/Azure/Actions
+#
+# Set up the following secrets in your repository:
+#   AZURE_CREDENTIALS, REGISTRY_USERNAME, REGISTRY_PASSWORD, REGISTRY_URL
+# 2. Change these variables for your configuration:
+env:
+  AZURE_WEBAPP_NAME: AppWithContainer   # set this to your application's name
+  CONTAINER_REGISTRY: ${{ secrets.REGISTRY_URL }}  # set secret with Container Registry URL, example : xyz.azurecr.io 
+# AZURE_RESOURCE_GROUP: ActionsDemo   # set this to your Azure Resource group's name - Needed only if you are provisioning the app in the workflow
+# AZURE_APP_PLAN: ActionPlan  # set this to your App service plan's name - Needed only if you are provisioning the app in the workflow
+  
+jobs:
+  build-and-deploy-to-dev:
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+    - uses: actions/checkout@v3
+    - name: Azure authentication
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+#     - name: Azure CLI script to provision a new Web App for Container
+#       uses: azure/CLI@v0-beta
+#       with:
+#         azcliversion: latest
+#         inlineScript: |
+#           az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  -i nginx
+    - name: ACR authentication
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.CONTAINER_REGISTRY }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}    
+    - name: Docker Build & Push to ACR
+      run: |
+        docker build . -t ${{ env.CONTAINER_REGISTRY }}/nodejsapp:${{ github.sha }}
+        docker push ${{ env.CONTAINER_REGISTRY }}/nodejsapp:${{ github.sha }} 
+
+# Uncomment the below action snippet if the Web app credentials are not updated as web app settings
+#     - name: Set Web App ACR authentication
+#       uses: Azure/appservice-settings@v1
+#       with:
+#         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+#         app-settings-json: |
+#           [
+#               {
+#                   "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+#                   "value": "${{ secrets.REGISTRY_PASSWORD }}",
+#                   "slotSetting": false
+#               },
+#               {
+#                   "name": "DOCKER_REGISTRY_SERVER_URL",
+#                   "value": "https://${{ env.CONTAINER_REGISTRY }}",
+#                   "slotSetting": false
+#               },
+#               {
+#                   "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+#                   "value": "${{ secrets.REGISTRY_USERNAME  }}",
+#                   "slotSetting": false
+#               }
+#           ]
+
+    - name: 'Deploy to Azure Web App for Container'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        images: ${{ env.CONTAINER_REGISTRY }}/nodejsapp:${{ github.sha }}
+#         startup-command: 'npm start'    # Include start up command to start the app container
+
+# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
+
+name: Build image, push & deploy
+
+on:
+  workflow_dispatch:
+  push:
+    paths-ignore:
+    - 'infrastructure/**'
+    - '.github/workflows/**'
+
+# This workflow consider the required Azure Resources are ready. Follow the detailed instructions to setup the pre-requisites in azuredeploy.yaml to:
+#   1. Prepare the Azure Resource Group
+#   2. Setup the service principal and create the credentials
+#   3. Create the Git Hub repo required secrets.
+#   4. Finally execute the azuredeploy.yaml from the Git Hub repo Actions (workflow display name: "Create Azure Resources")
+#
+# Prequisites workflow: https://github.com/Azure-Samples/dotnetcore-containerized-sqldb-ghactions/blob/main/.github/workflows/azuredeploy.yaml
+# For detailed sample explanation: https://github.com/Azure-Samples/dotnetcore-containerized-sqldb-ghactions/blob/main/README.md
+
+env:
+  AZURE_RESOURCE_GROUP: rg-todo-sample  # target resource, must match the {resource-group-name} you setup in the pre-requisties
+  WEB_APP_NAME: app-todo-sample         # set the name for the Web App on Azure
+  CONTAINER_IMAGE_NAME: app-todo-sample # set the name for the container image
+  SQL_CONNECTION_STRING: ${{ secrets.SQL_CONNECTION_STRING }}  # connection string for the Azure SQL database -> must be in the secrets
+  ACR_NAME: acrtodosample               # set the name for the Azure Container Registry
+  ACR_LOGIN_SERVER: acrtodosample.azurecr.io # fqdn for the Azure Container Registry
+  ACR_USERNAME: ${{ secrets.ACR_USERNAME }} # user name for accessing Azure Container Registry
+  ACR_PASSWORD: ${{ secrets.ACR_PASSWORD }} # password for accesing the Azure Container Registry
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v3
+
+    - name: Login for az cli commands 
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Login to ACR
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ env.ACR_LOGIN_SERVER }}
+        username: ${{ env.ACR_USERNAME }}
+        password: ${{ env.ACR_PASSWORD }}
+    
+    - name: Build & Push Container
+      run: |
+        echo "Build image and push to ${{ env.ACR_LOGIN_SERVER }}"
+
+        echo "Building the container..."
+        docker build -t ${{ env.CONTAINER_IMAGE_NAME }}:ci .
+        echo
+
+        echo "Tagging for ACR..."
+        docker tag ${{ env.CONTAINER_IMAGE_NAME }}:ci ${{ env.ACR_LOGIN_SERVER }}/${{ env.CONTAINER_IMAGE_NAME }}:${{ github.sha }}
+        echo
+
+        echo "Push image to ACR"
+        docker push ${{ env.ACR_LOGIN_SERVER }}/${{ env.CONTAINER_IMAGE_NAME }}:${{ github.sha }}
+        echo
+
+        echo "List the repositories in the ACR"
+        az acr repository list -n ${{ env.ACR_LOGIN_SERVER }}        
+      working-directory: application
+
+  deploy:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+    - name: Checkout Source Code
+      uses: actions/checkout@v3
+
+    - name: Login for az cli commands 
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+5
+    - name: Set version date
+      run: |
+        echo "APP_VERSION_DATE=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
+
+    - name: Set Web App Settings
+      uses: Azure/appservice-settings@v1
+      with:
+        app-name: ${{ env.WEB_APP_NAME }}  
+        slot-name: staging
+        app-settings-json: |
+          [
+            {
+              "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+              "value": "false",
+              "slotSetting": false
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_URL",
+              "value": "${{ env.ACR_LOGIN_SERVER }}",
+              "slotSetting": false
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+              "value": "${{ env.ACR_USERNAME  }}",
+              "slotSetting": false
+            },
+            {
+              "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+              "value": "${{ env.ACR_PASSWORD }}",
+              "slotSetting": false
+            },
+            {
+              "name": "VersionInfo__Number",
+              "value": "1.0.${{ github.run_number }}",
+              "slotSetting": false
+            },
+            {
+              "name": "VersionInfo__Date",
+              "value": "${{ env.APP_VERSION_DATE }}",
+              "slotSetting": false
+            }
+          ]
+        connection-strings-json: |
+          [
+            {
+              "name": "MyDbConnection",
+              "value": "${{ env.SQL_CONNECTION_STRING }}",
+              "type": "SQLAzure",
+              "slotSetting": false
+            }
+          ]
+
+    - name: Deploy Azure WebApp to Staging
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.WEB_APP_NAME }} 
+        images: ${{ env.ACR_LOGIN_SERVER }}/${{ env.CONTAINER_IMAGE_NAME }}:${{ github.sha }}
+        slot-name: staging
+      
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
+
+    # This task updates the database with the lates schema. Valid for intial setup and small non-changes. For breaking changes, other strategy needs to be in place.
+    - name: Update Database
+      run: |
+        dotnet tool install --global dotnet-ef
+        dotnet tool restore
+        dotnet ef database update
+      env:
+        ASPNETCORE_ENVIRONMENT: Development
+        ConnectionStrings__MyDbConnection: ${{ env.SQL_CONNECTION_STRING }}
+      working-directory: application
+
+    - name: Swap to production slot
+      run: |
+        az webapp deployment slot swap --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.WEB_APP_NAME }} --slot staging --target-slot production
+        echo "Swap finished. WebApp accessible at https://$(az webapp show --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.WEB_APP_NAME }} --query hostNames[0] -o tsv)"
+
+# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples

@@ -3,7 +3,7 @@ name: /workflow/deploy/ARM_Template/Resourcegrp
         .config
             srcURL="https://github.com/Azure©™/Actions"
                 env:
-  AZURE_RESOURCE_GROUP: << Akamaized Technologies, LLC >>   # set this to your Azure Resource group's name  
+  AZURE_RESOURCE_GROUP: << Akamaized Technologies, LLC >>   
   AZURE_SUBSCRIPTION_ID: << スマートテクノロジー >>   # set this to your Azure Subscription Id
   
 jobs:

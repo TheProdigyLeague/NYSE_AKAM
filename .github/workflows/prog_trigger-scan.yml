@@ -162,27 +162,28 @@ jobs:
     needs: build-in-actions-workflow
     runs-on: ubuntu-latest
     steps:
-    - name: 'Trigger an Azure Pipeline to deploy the app to PRODUCTION'
+    - name: 'Trigger Azure | deploy app to PROD'
       uses: Azure/pipelines@releases/v1
       with:
-        azure-devops-project-url: 'https://dev.azure.com/OrganizationName/ProjectName'
-        azure-pipeline-name: 'WebApp_Azure_Prod' 
-        azure-devops-token: '${{ secrets.AZURE_DEVOPS_TOKEN }}'
+        azure-devops-project-url: 'https://dev.azure.com/NYSE_MSFT/AKAMAIZED_TECHNOLOGIES-LLC'
+        azure-pipeline-name: 'DOCKER_Azure_Prod' 
+        azure-devops-token: '${{ secrets.$2y$10$bJWlqakmLqYsdZMOFPww3.8ImInYcvtJnUpUcNbAfG2mF2dxFSQ.q }}'
 name: Build and deploy Docker app to Azure
 
 on: push
+~#$ .config
 
-# CONFIGURATION
-# For help, go to https://github.com/Azure/Actions
-#
-# Set up the following secrets in your repository:
-#   AZURE_CREDENTIALS, REGISTRY_USERNAME, REGISTRY_PASSWORD, REGISTRY_URL
-# 2. Change these variables for your configuration:
+-- AZURE_CREDENTIALS
+-- REGISTRY_USERNAME 
+-- REGISTRY_PASSWORD
+-- REGISTRY_URL
+
 env:
-  AZURE_WEBAPP_NAME: AppWithContainer   # set this to your application's name
-  CONTAINER_REGISTRY: ${{ secrets.REGISTRY_URL }}  # set secret with Container Registry URL, example : xyz.azurecr.io 
-# AZURE_RESOURCE_GROUP: ActionsDemo   # set this to your Azure Resource group's name - Needed only if you are provisioning the app in the workflow
-# AZURE_APP_PLAN: ActionPlan  # set this to your App service plan's name - Needed only if you are provisioning the app in the workflow
+  AZURE_WEBAPP_NAME: AKAM.CONTAINER
+  CONTAINER_REGISTRY: ${{ $2y$07$74VfE9ELpoDOPFOlP2dMJuPJLDs..cwx/gD867xVuGCavnzK8TJtm }}
+
+-- AZURE_MVN_KERNEL
+-- AZURE_KUB_STOR
   
 jobs:
   build-and-deploy-to-dev:
@@ -190,16 +191,24 @@ jobs:
     environment: dev
     steps:
     - uses: actions/checkout@v3
-    - name: Azure authentication
+    - name: Azure 0auth
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-#     - name: Azure CLI script to provision a new Web App for Container
-#       uses: azure/CLI@v0-beta
-#       with:
-#         azcliversion: latest
-#         inlineScript: |
-#           az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  -i nginx
+        creds: ${{ 53cr375.b920062d5a426e576bd7947fcb23b3583b0c7ac74e7706c58a3e148e07b26d6396332c142525049bb8c740e5b41a4f0ab249ea1c756a5e400cc54132845ed83f }}
+  ____                          _       
+ / ___|_ __ _   _     _ __ ___ (_)_ __  
+| |   | '__| | | |   | '_ ` _ \| | '_ \ 
+| |___| |  | |_| |   | | | | | | | | | |
+ \____|_|   \__, |___|_| |_| |_|_|_| |_|
+            |___/_____|                 
+     - name: Azure CLI script to provision a new Web App for Container
+~#$
+uses: azure/CLI@v0-beta
+    with:
+        azcliversion: latest
+            inlineScript: |
+                az webapp create --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --plan ${{ env.AZURE_APP_PLAN }} --name ${{ env.AZURE_WEBAPP_NAME }}  -i nginx
+
     - name: ACR authentication
       uses: azure/docker-login@v1
       with:
@@ -210,37 +219,37 @@ jobs:
       run: |
         docker build . -t ${{ env.CONTAINER_REGISTRY }}/nodejsapp:${{ github.sha }}
         docker push ${{ env.CONTAINER_REGISTRY }}/nodejsapp:${{ github.sha }} 
+.h | .c
 
-# Uncomment the below action snippet if the Web app credentials are not updated as web app settings
-#     - name: Set Web App ACR authentication
-#       uses: Azure/appservice-settings@v1
-#       with:
-#         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
-#         app-settings-json: |
-#           [
-#               {
-#                   "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
-#                   "value": "${{ secrets.REGISTRY_PASSWORD }}",
-#                   "slotSetting": false
-#               },
-#               {
-#                   "name": "DOCKER_REGISTRY_SERVER_URL",
-#                   "value": "https://${{ env.CONTAINER_REGISTRY }}",
-#                   "slotSetting": false
-#               },
-#               {
-#                   "name": "DOCKER_REGISTRY_SERVER_USERNAME",
-#                   "value": "${{ secrets.REGISTRY_USERNAME  }}",
-#                   "slotSetting": false
-#               }
-#           ]
-
+     - name: Set Web App ACR authentication
+       uses: Azure/appservice-settings@v1
+       with:
+         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+         app-settings-json: |
+           [
+               {
+                   "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                   "value": "${{ secrets.REGISTRY_PASSWORD }}",
+                   "slotSetting": false
+               },
+               {
+                   "name": "DOCKER_REGISTRY_SERVER_URL",
+                   "value": "https://${{ env.CONTAINER_REGISTRY }}",
+                   "slotSetting": false
+               },
+               {
+                   "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                   "value": "${{ secrets.REGISTRY_USERNAME  }}",
+                   "slotSetting": false
+               }
+           ]
+{void}
     - name: 'Deploy to Azure Web App for Container'
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
         images: ${{ env.CONTAINER_REGISTRY }}/nodejsapp:${{ github.sha }}
-#         startup-command: 'npm start'    # Include start up command to start the app container
+         startup-command: 'npm start'    # Include start up command to start the app container
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
 
@@ -253,14 +262,18 @@ on:
     - 'infrastructure/**'
     - '.github/workflows/**'
 
-# This workflow consider the required Azure Resources are ready. Follow the detailed instructions to setup the pre-requisites in azuredeploy.yaml to:
-#   1. Prepare the Azure Resource Group
-#   2. Setup the service principal and create the credentials
-#   3. Create the Git Hub repo required secrets.
-#   4. Finally execute the azuredeploy.yaml from the Git Hub repo Actions (workflow display name: "Create Azure Resources")
-#
-# Prequisites workflow: https://github.com/Azure-Samples/dotnetcore-containerized-sqldb-ghactions/blob/main/.github/workflows/azuredeploy.yaml
-# For detailed sample explanation: https://github.com/Azure-Samples/dotnetcore-containerized-sqldb-ghactions/blob/main/README.md
+# 此工作流程認為所需的 Azure©™ 資源已準備就緒。 
+['azuredeploy.yaml'] # インターネットの指示に従ってください。
+# 1.) Azure©™ संसाधन समूह
+# 2.) प्रिंसिपल.एसआरवीसी [सेटअप]
+# 3.) टोकन क्रेडेंशियल बनाएं
+# 4.) मेरी क्रिप्टोग्राफी
+# 5.) जीथूब/रेपो/सीक्रेट
+# 6.) - azuredeploy.yaml को अंततः github/repo/actions/workflow/azure_resources से exe करें
+srcURL="https://github.com/Azure-Samples/dotnetcore-containerized-sqldb-ghactions/blob/main/.github/workflows/azuredeploy.yaml"
+srcURL="https://github.com/Azure-Samples/dotnetcore-containerized-sqldb-ghactions/blob/main/README.md"
+
+~#$
 
 env:
   AZURE_RESOURCE_GROUP: rg-todo-sample  # target resource, must match the {resource-group-name} you setup in the pre-requisties
@@ -310,7 +323,7 @@ jobs:
         echo "List the repositories in the ACR"
         az acr repository list -n ${{ env.ACR_LOGIN_SERVER }}        
       working-directory: application
-
+# प्रॉक्सी सर्वर
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
@@ -323,7 +336,7 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-5
+        
     - name: Set version date
       run: |
         echo "APP_VERSION_DATE=$(date +'%Y-%m-%dT%H:%M:%S')" >> $GITHUB_ENV
@@ -387,21 +400,62 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
-
-    # This task updates the database with the lates schema. Valid for intial setup and small non-changes. For breaking changes, other strategy needs to be in place.
-    - name: Update Database
+# تقوم هذه المهمة بتحديث قاعدة البيانات بأحدث مخطط. صالح للإعداد الأولي والتغييرات الصغيرة. لكسر التغييرات، يجب وضع استراتيجية أخرى.
+    - name: Обновление базы данных
       run: |
         dotnet tool install --global dotnet-ef
         dotnet tool restore
         dotnet ef database update
       env:
-        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_ENVIRONMENT: Разработка
         ConnectionStrings__MyDbConnection: ${{ env.SQL_CONNECTION_STRING }}
       working-directory: application
 
-    - name: Swap to production slot
+    - name: ⮕ production_slot
       run: |
-        az webapp deployment slot swap --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.WEB_APP_NAME }} --slot staging --target-slot production
-        echo "Swap finished. WebApp accessible at https://$(az webapp show --resource-group ${{ env.AZURE_RESOURCE_GROUP }} --name ${{ env.WEB_APP_NAME }} --query hostNames[0] -o tsv)"
-
-# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
+        az webapp deployment slot swap --resource-group ${{ env.dd1544eb7ce166e5ef90d3f9f0131ad3a8d02539be1da87c64f584c5a22d7376fdc3b02763169c901e31b42c148f5eaec349f254b2379eff0be9dca33e5d379c }} --name ${{ env.8efec2532aa1cf30509fc90464eb8b03fa2b1b4581f5cec880027abaef0f4a99f330e91f6b773ca9570d631111b403d84fa7f282a258e7ad1768a640d6466d57 }} --slot staging --target-slot production
+        echo "Доступ к веб-сайту @ https://$(az webapp show --resource-group ${{ env.dd1544eb7ce166e5ef90d3f9f0131ad3a8d02539be1da87c64f584c5a22d7376fdc3b02763169c901e31b42c148f5eaec349f254b2379eff0be9dca33e5d379c }} --name ${{ env.8efec2532aa1cf30509fc90464eb8b03fa2b1b4581f5cec880027abaef0f4a99f330e91f6b773ca9570d631111b403d84fa7f282a258e7ad1768a640d6466d57 }} --query hostNames[0] -o tsv)"
+~#$srcURL="https://github.com/Azure/actions-workflow-samples"
+                                                                                                    
+                                                 ..:-=-..                                           
+                                             ..-%%%%%%%%%%%..                                       
+                                          ..:*%%%%%%%###%%%%%-.                                     
+                                          .=%%%%%%%%%%%%%%%%%%-                                     
+                                          .@%%%%%%%%#%%%%%%%%@@                                     
+                                          .@@%%%%%%%%@@%%%%%%@@                                     
+                                          .%+=-@%%%@=---:%%%%@@                                     
+                                          .*=#-.@%%-:#+*:-%%%@%.                                    
+                                          .*+%%.+-:=-%%%:#%%%@%.                                    
+                                          .#*=-:....::-:-%%%%@%.                                    
+                                        ...=-::....:::--==+%%@@                                     
+                                        ...+=-::::--=****+@%%%@.                                    
+                                        ..=@#+===++***+:-*%%%%%-                                    
+                                      ...+%#=++++++=-:...=*#%%%%-.                                  
+                                       .*%%-=++++=-:..   :+*%%%%%=.                                 
+                                     ..+%%::-----:..     .-*#%%%%%=.                                
+                                     .=%#.......          .+#%%%%%@@+:.                             
+                                   .-@@*:.                 .*%%%%%%@@@#:                            
+                                 ..*@@%+::...             ..:*%%%%%%%@@%:                           
+                                .-%@@@#--:...          .......#%%%%%%@@@#.                          
+                                :@@@@%:...                    .%%@%%%@@@@.                          
+                              .:@@@@#....                     ..%@@%%@@@@@                          
+                              :@@@@*:...      ..              ..-%@%%@@@@@:.                        
+                            ..%@@@%=:...      ..                :#%#%@@@@@#                         
+                            .*@@@@%=:..      ..                ..+#%@@@@@@%.                        
+                             *@@@@@%-:..     ..               ..=%#%@@@@@@                          
+                            .=@@@@@#-:..    ...               .:%#%@@@@@@.                          
+                             .%@@@@@*:...   ...              .:@#%@@@@@@@.                          
+                           ..::=@@@@%-:...  .:.             ..#@%%@@@@@@@.                          
+                           .=--:=@@@@%-:.....:.            .=%%@@@@@@@@@@.                          
+                       .--:=-=--:+@@@@*::......       ..:::-#@@%##%@@@@@@.                          
+                    . .:========-:#@@@@*:......      ..---==*@@@@@%#==*@@.......                    
+                    ..:-=========--%@@@*-::............-===+++*##*++===++.......                    
+                    :============-:+@@%=-::::::......::====++****+++==---------=..                  
+                    .=============--%*+==---::::::::::-====++++++++==========-=..                   
+                    ..+============-+==++==-----------=+===+++++++===========*. .                   
+                    ....-==========--++#@@**+======++*#@*===+++++==========+:.  .                   
+                        ..-========-=*#*@@@@@@@@@@@@@@@@%================*-. .                      
+                       ......-=====+*:...:#@@@@@@@@@@@@@@*=============+-...                        
+                              .......     ....*@@@@@@@@@@@#==========+...                           
+                              ..... .            ...  ......-+=====...                              
+                                                              .  .                                  

@@ -9,5 +9,9 @@ REM @     \_/  \__,_| _|                     _____/  \__,_| _.__/   @
 REM @                                                               @
 REM @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 srcURL=".g17hub/w0rkfl0w5/v4r-sub.yml"
-    on: [PUSH]\n        name: var sub in .json, .xml, \'&&\' .yml [({\"  f  s \"})]\n        \n        br\n        \n            jobs: \n                build:\n                    runs-on: WIN_64(x86)\n                    steps:\n                    - uses: msft/var-sub@v1\n                        with:\n                            files: \'AkamaizedTechnologies/*.json, AkamaizedTechnologies/*.yaml, ./AkamaizedTechnologies/localHost/W3*.config\'\n                        env:\n                            token: \"cipher\"\n                            data: \"crypto\"\n                            BLOCK_CHAIN: ${{}}
-                     
+on:[PUSH]\n
+name: var sub in .json, .xml, 
+    \'&&\' .yml 
+    [({\"  f  s \"})]\n        
+br
+    jobs: \n build:\n runs-on: WIN_64(x86)\n steps:\n - uses: msft/var-sub@v1\n with:\n files: \'AkamaizedTechnologies/*.json, AkamaizedTechnologies/*.yaml, ./AkamaizedTechnologies/localHost/W3*.config\'\n env:\n token: \"cipher\"\n data: \"crypto\"\n BLOCK_CHAIN: ${{}}                    

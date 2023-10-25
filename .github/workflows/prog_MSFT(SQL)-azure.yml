@@ -152,6 +152,28 @@ jobs:
         server-name: REPLACE_THIS_WITH_YOUR_SQL_SERVER_NAME
         connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
         dacpac-package: './Database.dacpac'
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+     - uses: actions/checkout@v2.3.2
+     # login not needed if firewall is configured
+     - uses: Azure/login@v1
+       with:
+         creds: ${{secrets.AZURE_CREDENTIALS}}
+     - uses: azure/postgresql@v1
+      with:
+        connection-string: ${{ secrets.AZURE_POSTGRESQL_CONNECTION_STRING }}
+        server-name: REPLACE_THIS_WITH_YOUR_POSTGRESQL_SERVER_NAME
+        plsql-file: "sql_files/*.sql"
+        modules:
+    config:
+        wtools:
+            configFile: 'config/test-local.php'
+
     # Azure logout
     - name: logout
       run: |
